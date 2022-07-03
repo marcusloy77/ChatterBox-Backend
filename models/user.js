@@ -8,7 +8,7 @@ const User = {
     `
     return db
       .query(sql, [firstName, lastName, userName, email, passwordDigest])
-      .then(dbRes => dbRes.rows[0].user_name)
+      .then(dbRes => dbRes.rows[0])
   },
   findByUserName: (userName) => {
     const sql = `
@@ -27,6 +27,17 @@ const User = {
       .then(dbRes => {
         // console.log(dbRes.rows[0].user_name)
         return dbRes.rows[0]})
+  },
+  search: (searchQuery) => {
+    const sql = `
+    SELECT user_name, first_name, last_name, id FROM users WHERE user_name ILIKE $1 OR first_name ILIKE $1 OR last_name ILIKE $1 LIMIT 10`
+    const searchQuerySQL = '%' + searchQuery + '%'
+
+    return db
+      .query(sql, [searchQuerySQL])
+      .then(dbRes => {
+        return dbRes.rows
+      })
   }
 }
 
