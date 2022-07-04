@@ -5,19 +5,23 @@ const Friend = require('../models/friend')
 const User = require('../models/user')
 
 
-router.get('/:id', (req, res) => {
-	console.log('at router friends')
+router.get('/requests/:id', (req, res) => {
+	console.log('at router friends requests')
   const id = req.params.id
   Friend
     .getFriendRequests(id)
     .then(list => res.json({list}))
 })
-
+router.get('/:id', (req, res) => {
+	console.log('at router friends')
+  const id = req.params.id
+  Friend
+    .getFriendList(id)
+    .then(list => res.json({list}))
+})
+ 
 router.post('/', (req, res) => {
 	console.log('at post router friends, accepting friend request')
-
-	console.log(req.body)
-
 	User
 		.findByUserName(req.body.friendUsername)
 		.then(friendProfile => {

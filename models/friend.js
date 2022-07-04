@@ -13,12 +13,15 @@ const Friend = {
       .query(sql)
   },
 
-  getFriendsList: (id) => {
+  getFriendList: (id) => {
     const sql = `
-    SELECT * FROM friend_list_${id}
+    SELECT * FROM friend_list_${id} WHERE relationship = 'friend'
     `
     return db
       .query(sql)
+      .then(dbRes => {
+        return dbRes.rows
+      })
   },
   getFriendRequests: (id) => {
     const sql = `
@@ -27,7 +30,8 @@ const Friend = {
     return db
       .query(sql)
       .then(dbRes => {
-        return dbRes.rows})
+        return dbRes.rows
+      })
   },
 
   getFriendsListByUsername: (userName) => {
