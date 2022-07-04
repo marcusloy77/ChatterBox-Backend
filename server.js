@@ -10,6 +10,7 @@ const { Server }= require('socket.io')
 app.use(cors())
 
 const server = http.createServer(app)
+const messageController = require('./controllers/message_controller')
 
 const io = new Server(server, {
   cors: {
@@ -28,6 +29,7 @@ io.on('connection', (socket) => {
 
   socket.on('message', (data) => {
     console.log(data)
+    messageController(data)
     socket.to(data.room).emit("recieve-message", data)
   })
 })
