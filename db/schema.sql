@@ -14,4 +14,11 @@ CREATE TABLE users(
 CREATE TABLE $1_friends_list(
   id SERIAL PRIMARY KEY,
   friend_id TEXT
-)
+);
+
+CREATE TABLE conversation(
+  id SERIAL PRIMARY KEY, 
+  user_id_1 INTEGER, 
+  user_id_2 INTEGER
+);
+

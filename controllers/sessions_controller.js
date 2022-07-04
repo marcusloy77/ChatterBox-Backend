@@ -4,11 +4,6 @@ const User = require('../models/user')
 const router = express.Router()
 const bcrypt = require('bcrypt')
 
-
-router.get('/', (req, res) => {
-    res.json({burgerLayers})
-})
-
 router.post('/', (req, res) => {
   const { userName, password } = req.body
   

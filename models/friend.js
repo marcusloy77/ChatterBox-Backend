@@ -20,6 +20,15 @@ const Friend = {
     return db
       .query(sql)
   },
+  getFriendRequests: (id) => {
+    const sql = `
+    SELECT * FROM friend_list_${id} WHERE relationship = 'request'
+    `
+    return db
+      .query(sql)
+      .then(dbRes => {
+        return dbRes.rows})
+  },
 
   getFriendsListByUsername: (userName) => {
 
@@ -27,9 +36,9 @@ const Friend = {
 
   sendRequest: (id, userName, friendId, friendUserName) => {
     const sql = `
-    INSERT INTO friend_list_${id}(user_name, relationship) VALUES($1, 'pending')`
+      INSERT INTO friend_list_${id}(user_name, relationship) VALUES($1, 'pending')`
     const sql2 = `
-    INSERT INTO friend_list_${friendId}(user_name, relationship) VALUES($1, 'request')
+      INSERT INTO friend_list_${friendId}(user_name, relationship) VALUES($1, 'request')
     `
     db.query(sql, [friendUserName])
     return db.query(sql2, [userName])
@@ -37,20 +46,23 @@ const Friend = {
 
   acceptRequest: (id, userName, friendId, friendUserName) => {
     const sql = `
-    UPDATE friend_list_${id} SET relationship = 'friend' WHERE user_name = $1
-    UPDATE friend_list_${friendId} SET relationship = 'friend' WHERE user_name = $2
-    `
-    return db
-      .query(sql, [friendUserName, userName])
+      UPDATE friend_list_${id} SET relationship = 'friend' WHERE user_name = $1`
+    const sql2 =`
+      UPDATE friend_list_${friendId} SET relationship = 'friend' WHERE user_name = $1
+      `
+    db.query(sql, [friendUserName])
+    return db.query(sql2, [userName])
   },
 
   denyRequest: (id, userName, friendId, friendUserName) => {
     const sql = `
     DELETE FROM friend_list_${id} WHERE user_name = $1
-    DELETE FROM friend_list_${friendId} WHERE user_name = $2
     `
-    return db
-      .query(sql, [friendUserName, userName])
+    const sql2 = `
+    DELETE FROM friend_list_${friendId} WHERE user_name = $1
+    `
+    db.query(sql, [friendUserName])
+    return db.query(sql2, [userName])
   }
   
 }
