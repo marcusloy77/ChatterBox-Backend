@@ -32,6 +32,16 @@ router.get('/:searchQuery', (req, res) => {
     })
 })
 
+router.get('/getId/:username', (req, res) => {
+  const username = req.params.username
+
+  User
+    .findByUserName(username)
+    .then(user => {
+      res.json(user)
+    })
+})
+
 router.post('/addfriend', (req, res) => {
   const data = req.body
   const id = data.loggedInUserId

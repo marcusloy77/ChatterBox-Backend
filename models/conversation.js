@@ -20,8 +20,8 @@ const Conversation = {
   },
 
   addMessage: (sender_id, id2, message, sender_username) => {
-    let idFirst
-    let idSecond
+    let idFirst = sender_id
+    let idSecond = id2
     if (sender_id > id2) {
       idFirst = sender_id
       idSecond = id2
@@ -30,12 +30,17 @@ const Conversation = {
       idFirst = id2
       idSecond = sender_id
     }
+    if (idFirst > idSecond){
 
     sql = `
     INSERT INTO conversation_${idFirst}_${idSecond}(message, sender_id, sender_username) VALUES($1, $2, $3)
     `
 
     return db.query(sql, [message, sender_id, sender_username])
+    }
+    else {
+      return false
+    }
   },
 
   getConversation: (id1, id2) => {
@@ -50,9 +55,9 @@ const Conversation = {
       idSecond = id1
     }
     sql = `
-    SELECT * FROM conversation_${idFirst}_${idSecond}
+    SELECT * FROM conversation_${idFirst}_${idSecond} ORDER BY id DESC LIMIT 30 
     `
-    return db.query(sql)
+    return db.query(sql).then(dbRes => dbRes.rows)
   },
 
   createRoom: (username1, username2, id1, id2) => {

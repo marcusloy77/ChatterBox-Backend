@@ -4,7 +4,7 @@ const User = require('../models/user')
 const router = express.Router()
 const bcrypt = require('bcrypt')
 
-router.get('/:username', (req, res )=> {
+router.get('/:username', (req, res) => {
 
   const userName = req.params.username
   console.log(req.params)

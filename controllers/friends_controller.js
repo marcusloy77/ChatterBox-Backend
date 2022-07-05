@@ -6,7 +6,6 @@ const User = require('../models/user')
 const Conversation = require('../models/conversation')
 
 router.get('/requests/:id', (req, res) => {
-	console.log('at router friends requests')
   const id = req.params.id
   Friend
     .getFriendRequests(id)
@@ -14,7 +13,6 @@ router.get('/requests/:id', (req, res) => {
 })
 
 router.get('/:id', (req, res) => {
-	console.log('at router friends')
   const id = req.params.id
   Friend
     .getFriendList(id)
@@ -22,7 +20,6 @@ router.get('/:id', (req, res) => {
 })
  
 router.post('/', (req, res) => {
-	console.log('at post router friends, accepting friend request')
 	User
 		.findByUserName(req.body.friendUsername)
 		.then(friendProfile => {
