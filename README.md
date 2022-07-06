@@ -1,6 +1,6 @@
 <h1> ChatterBox Backend! </h1>
 
-<h2>Backend API designed for the Chatterbox app found <a href='https://chatterbox-message-app.herokuapp.com/'> here </a> Github found <a href='https://github.com/marcusloy77/ChatterBox'> here </a>  </h2>
+<h2>Back-end API designed for the Chatterbox app found <a href='https://chatterbox-message-app.herokuapp.com/'> here </a> front-end found <a href='https://github.com/marcusloy77/ChatterBox'> here </a>  </h2>
   
 <h2> Tech Stack: Express, BCrypt, PG, PSQL </h2>
 
