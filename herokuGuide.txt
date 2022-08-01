@@ -1,0 +1,11 @@
+
+
+heroku login
+
+npm build in front end
+
+move build to backend
+
+heroku push origin main
+
+heroku pg:push chatterbox_db DATABASE_URL --app chatterbox-message-app
