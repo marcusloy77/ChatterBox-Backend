@@ -10,13 +10,12 @@ CREATE TABLE users(
   password_digest TEXT
 );
 
-
-CREATE TABLE $1_friends_list(
+CREATE TABLE friends_list_{user_id}(
   id SERIAL PRIMARY KEY,
   friend_id TEXT
 );
 
-CREATE TABLE conversation(
+CREATE TABLE conversation_{user_id1}_{user_id2}(
   id SERIAL PRIMARY KEY, 
   user_id_1 INTEGER, 
   user_id_2 INTEGER
